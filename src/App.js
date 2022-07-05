@@ -27,20 +27,47 @@ const App = () => {
       </section>
     );
   }
-  console.log(apiData);
-  const { company, dates, duties, id, title } = apiData[value];
+  // console.log(apiData);
+  const { company, dates, duties, title } = apiData[value];
   // console.log(company);
-  return <div>
-    
-  </div>;
+  return (
+    <section className="section">
+      <div className="title">
+        <h2>Experience</h2>
+      </div>
+      <div className="underline"></div>
+      <div className="jobs-center">
+        {/* btn */}
+        <div className="btn-container">
+          {apiData.map((item, index) => {
+            // console.log(item.id);
+            return (
+              <button
+                key={item.id}
+                onClick={() => setValue(index)}
+                className={`job-btn ${index === value && "active-btn"}`}
+              >
+                {item.company}
+              </button>
+            );
+          })}
+        </div>
+        {/* content */}
+        <article className="job-info">
+          <h3>{title}</h3>
+          <h4>{company}</h4>
+          <p className="job-date">{dates}</p>
+          {duties.map((item, index) => {
+            return (
+              <div className="job-desc" key={index}>
+                <FaAngleDoubleRight />
+                <p>{item}</p>
+              </div>
+            );
+          })}
+        </article>
+      </div>
+    </section>
+  );
 };
 export default App;
-
-
-
-
-
-
-
-
-
