@@ -1,32 +1,46 @@
-
-import { useState,useEffect } from "react";
+import React from "react";
 import { FaAngleDoubleRight } from "react-icons/fa";
-
-
-
+import { useState, useEffect } from "react";
 const API_URL = "https://course-api.com/react-tabs-project";
-
 const App = () => {
-
-const [apidata, setApiData] = useState([]);
-const [isLoading, setİsLoading] = useState(true)
-const fetchData = async() => {
-  try {
-    const response = fetch(API_URL);
-    const data = (await response).json();
-
-    setApiData(data);
-  } catch (error) {
-    console.log(error);
+  const [apiData, setApiData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [value, setValue] = useState(0);
+  const fetchData = async () => {
+    try {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      // console.log(data);
+      setApiData(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+  if (isLoading) {
+    return (
+      <section className="section loading">
+        <h1>Loading...</h1>
+      </section>
+    );
   }
-}
-
-useEffect(() => {
-  fetchData();  
-}, [third])
-
-console.log(apiData);
-  return <div>App</div>;
+  console.log(apiData);
+  const { company, dates, duties, id, title } = apiData[value];
+  // console.log(company);
+  return <div>
+    
+  </div>;
 };
-
 export default App;
+
+
+
+
+
+
+
+
+
